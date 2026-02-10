@@ -23,10 +23,9 @@ jobs:
 
       - name: Run script
         env:
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-          TARGET_IP: ${{ secrets.TARGET_IP }}
-          TARGET_PORT: ${{ secrets.TARGET_PORT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          TARGET_ADDRESS: ${{ secrets.TARGET_ADDRESS }}
         run: python monitor.py
 
       - name: Commit state changes
