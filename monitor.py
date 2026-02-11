@@ -16,7 +16,7 @@ def send_tg_message(text):
 
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     try:
-        requests.post(url, data={"chat_id": CHANNEL_ID, "text": text}, timeout=10)
+        requests.post(url, data={"chat_id": CHANNEL_ID, "text": text, "parse_mode": "HTML"}, timeout=10)
     except Exception as e:
         print(f"Error sending TG message: {e}")
 
@@ -53,14 +53,14 @@ if current_state != prev_state:
     hours, remainder = divmod(int(duration.total_seconds()), 3600)
     minutes, _ = divmod(remainder, 60)
     
-    time_str = f"{hours} год. {minutes} хв." if hours > 0 else f"{minutes} хв."
+    time_str = f"{hours}год {minutes}хв" if hours > 0 else f"{minutes}хв"
     
     if current_state == "online":
         emoji = "🟢"
-        msg = f"{emoji} СВІТЛО Є!\nБуло відсутнє: {time_str}"
+        msg = f"{emoji} <b>{now.strftime('%H:%M')} Світло з'явилося</b>\nЙого не було {time_str}"
     else:
         emoji = "🔴"
-        msg = f"{emoji} СВІТЛО ЗНИКЛО\nБуло в наявності: {time_str}"
+        msg = f"{emoji} <b>{now.strftime('%H:%M')} Світло зникло</b>\nВоно було {time_str}"
     
     send_tg_message(msg)
     
